@@ -62,13 +62,24 @@ def apiori_frequent_set_mining(data, min_sup, min_conf):
             if count >= min_sup:
                 l[item] = count
                 large_itemset[item] = count/len(data) * 100
-        
-    for item, count in large_itemset.items():
-        print(item, count)
+    
+    return large_itemset
+
+def apriori_association_rule(large_itemset, min_conf):
+    for li in large_itemset:
+        if len(li) > 1:
+            lhs_combinations = [frozenset(i) for i in combinations(li, len(li) - 1)]
+            for lhs in lhs_combinations:
+                rhs = li - lhs
+                confidence = large_itemset[li]/large_itemset[lhs] * 100
+                if confidence >= min_conf * 100:
+                    print(str(lhs) + " => " + str(rhs) + " [Conf: " + str(confidence) + "% Supp: " + str(large_itemset[li]) + "%]")
+
+
                 
 
-apiori_frequent_set_mining(data, 0.7, 0)
-
+itemset = apiori_frequent_set_mining(data, 0.7, 0.8)
+apriori_association_rule(itemset, 0.8)
 
         
             
