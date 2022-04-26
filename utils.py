@@ -10,6 +10,16 @@ def process_data(dataset):
     for index, row in df.iterrows():    #extract all the data with the specified rows
         processed_data.append([str(row["Full Complaint ID"]), [str(row["Complaint Year Number"]), str(row["County"]), 
                         str(row["Offense Description"]), str(row["Month Number"]),str(row["Bias Motive Description"])]])
+    
+    for row in processed_data:
+        if (int(row[1][3]) in (12, 1, 2)):
+            row[1][3] = "Winter"
+        elif (int(row[1][3]) in (3, 4, 5)):
+            row[1][3] = "Spring"
+        elif (int(row[1][3]) in (6, 7, 8)):
+            row[1][3] = "Summer"
+        else:
+            row[1][3] = "Fall"
 
     return processed_data   #return processed data
 
