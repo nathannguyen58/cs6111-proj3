@@ -9,7 +9,7 @@ def process_data(dataset):
     processed_data = []
     for index, row in df.iterrows():    #extract all the data with the specified rows
         processed_data.append([str(row["Full Complaint ID"]), [str(row["Complaint Year Number"]), str(row["County"]), 
-                        str(row["Offense Description"]), str(row["Bias Motive Description"])]])
+                        str(row["Offense Description"]), str(row["Month Number"]),str(row["Bias Motive Description"])]])
 
     return processed_data   #return processed data
 
